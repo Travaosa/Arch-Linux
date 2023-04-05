@@ -1,15 +1,11 @@
-parted
-mklabel gpt
-unit mib
-mkpart EFI 1 513
-mkpart SWAP 513 2561
-mkpart / 2561 100%
-set 1 esp on
-set 2 swap on
-print
-quit
-
-read
+parted /dev/sda mklabel gpt
+parted /dev/sda unit mib
+parted /dev/sda mkpart EFI 1 513
+parted /dev/sda mkpart SWAP 513 2561
+parted /dev/sda mkpart / 2561 100%
+parted /dev/sda set 1 esp on
+parted /dev/sda set 2 swap on
+parted /dev/sda print
 
 mkfs.fat -F 32 /dev/sda1
 mkfs.swap /dev/sda2 && swapon /dev/sda2
@@ -21,8 +17,6 @@ mount /dev/sda1 /mnt/boot/efi
 
 pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim
 genfstab -U /mnt >> /mnt/ets/fstab && cat /mnt/etc/fstab
-
-read
 
 arch-chroot /mnt
 grub-install /dev/sda
