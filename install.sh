@@ -20,11 +20,10 @@ mount /dev/sda1 /mnt/boot/efi
 pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim
 genfstab -U /mnt >> /mnt/etc/fstab && cat /mnt/etc/fstab
 
-arch-chroot /mnt
-grub-install /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
-passwd
-exit
+arch-chroot /mnt grub-install /dev/sda
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt echo -e 'Смените пароль'
+arch-chroot /mnt passwd
 
 umount -R /mnt
 reboot
