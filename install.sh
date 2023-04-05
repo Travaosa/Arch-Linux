@@ -16,7 +16,7 @@ mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 
 pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim
-genfstab -U /mnt >> /mnt/ets/fstab && cat /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab && cat /mnt/etc/fstab
 
 arch-chroot /mnt
 grub-install /dev/sda
