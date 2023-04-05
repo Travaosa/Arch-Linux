@@ -14,15 +14,14 @@ mkfs.swap /dev/sda2 && swapon /dev/sda2
 mkfs.btrfs /dev/sda3
 
 mount /dev/sda3 /mnt
-mkdir -p /mnt/boot/efi
-mount /dev/sda1 /mnt/boot/efi
+mkdir -p /mnt/boot/EFI
+mount /dev/sda1 /mnt/boot/EFI
 
 pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim
 genfstab -U /mnt >> /mnt/etc/fstab && cat /mnt/etc/fstab
 
 arch-chroot /mnt grub-install /dev/sda
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
-arch-chroot /mnt passwd
 
 umount -R /mnt
 reboot
