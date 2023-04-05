@@ -1,3 +1,5 @@
+dd if=/dev/zero of=/dev/sda bs=256M count=4
+
 parted /dev/sda mklabel gpt
 parted /dev/sda unit mib
 parted /dev/sda mkpart EFI 1 513
