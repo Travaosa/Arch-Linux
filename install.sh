@@ -22,6 +22,7 @@ genfstab -U /mnt >> /mnt/etc/fstab && cat /mnt/etc/fstab
 
 arch-chroot /mnt grub-install /dev/sda
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt passwd
 
 umount -R /mnt
 reboot
