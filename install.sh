@@ -10,14 +10,14 @@ parted /dev/sda set 2 swap on
 parted /dev/sda print
 
 mkfs.fat -F 32 /dev/sda1
-mkfs.swap /dev/sda2 && swapon /dev/sda2
+mkswap /dev/sda2 && swapon /dev/sda2
 mkfs.btrfs /dev/sda3
 
 mount /dev/sda3 /mnt
 mkdir -p /mnt/boot/EFI
 mount /dev/sda1 /mnt/boot/EFI
 
-pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim
+pacstrap /mnt base linux linux-firmware networkmanager efibootmgr bash-completion grub vim mc
 genfstab -U /mnt >> /mnt/etc/fstab && cat /mnt/etc/fstab
 
 arch-chroot /mnt grub-install /dev/sda
